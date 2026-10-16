@@ -32,15 +32,7 @@ description: All articles of the journal, ordered by volume and issue.
 ---
 ## Abstract
 
-* **Purpose**
-
-  : This study aimed to compare the effects of free-weight resistance with and without elastic band (EB) tension on upper-body maximal strength and strength endurance during bench press (BP) exercise.
-* **Methods**
-
-  : Twenty-six trained males (aged 26 ± 2.4 years; body mass 73 ± 7.6 kg; stature 172 ± 5.8 cm) were randomly assigned to two groups, CON (n = 13) or EXP (n = 13), and completed two weekly BP sessions over 12 weeks. Both groups followed the same training program except that the EXP group executed the BP with 30% of the prescribed load originating from the use of EB. BP one repetition maximum(1RM) and the maximum number of repetitions (MNR) for muscular fatigue were tested before and after the intervention.
-* **Results**
-
-  : Analysis of covariance with the pretest value as the covariate revealed that both the CON and EXP groups demonstrated improvements in maximal strength and muscular endurance. However, the EXP group exhibited significantly greater improvements in 1RM (14% vs. 12%) and MNR (27% vs. 7%).
-* **Conclusion**
-
-  : A combination of free-weight and elastic bands may provide a greater training stimulus than free-weight resistance alone to improve upper-body strength and muscular endurance in trained adult men.
+* **Purpose**: This study aimed to compare the effects of free-weight resistance with and without elastic band (EB) tension on upper-body maximal strength and strength endurance during bench press (BP) exercise.
+* **Methods**: Twenty-six trained males (aged 26 ± 2.4 years; body mass 73 ± 7.6 kg; stature 172 ± 5.8 cm) were randomly assigned to two groups, CON (n = 13) or EXP (n = 13), and completed two weekly BP sessions over 12 weeks. Both groups followed the same training program except that the EXP group executed the BP with 30% of the prescribed load originating from the use of EB. BP one repetition maximum(1RM) and the maximum number of repetitions (MNR) for muscular fatigue were tested before and after the intervention.
+* **Results**: Analysis of covariance with the pretest value as the covariate revealed that both the CON and EXP groups demonstrated improvements in maximal strength and muscular endurance. However, the EXP group exhibited significantly greater improvements in 1RM (14% vs. 12%) and MNR (27% vs. 7%).
+* **Conclusion**: A combination of free-weight and elastic bands may provide a greater training stimulus than free-weight resistance alone to improve upper-body strength and muscular endurance in trained adult men.
