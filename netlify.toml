@@ -1,0 +1,17 @@
+[build]
+  command = "hugo --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.123.7"
+
+# Redirecciones desde las URLs antiguas de Grav (ejemplo; ajusta a tus rutas reales).
+# [[redirects]]
+#   from = "/volumen-1/numero-1/mi-articulo"
+#   to = "/articles/mi-articulo/"
+#   status = 301
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

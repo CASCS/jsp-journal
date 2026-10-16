@@ -1,0 +1,134 @@
+{{ define "head_extra" }}{{ partial "citation-meta.html" . }}{{ end }}
+
+{{ define "main" }}
+{{- $licenses := dict
+    "CC BY 4.0" "https://creativecommons.org/licenses/by/4.0/"
+    "CC BY-SA 4.0" "https://creativecommons.org/licenses/by-sa/4.0/"
+    "CC BY-NC 4.0" "https://creativecommons.org/licenses/by-nc/4.0/"
+    "CC BY-NC-SA 4.0" "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    "CC BY-ND 4.0" "https://creativecommons.org/licenses/by-nd/4.0/"
+    "CC BY-NC-ND 4.0" "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+    "CC0 1.0" "https://creativecommons.org/publicdomain/zero/1.0/" }}
+{{- $languages := dict "es" "Spanish" "en" "English" "pt" "Portuguese" "fr" "French" }}
+
+{{- /* The Zenodo record is derived from the DOI when no URL is given. */ -}}
+{{- $zenodo := .Params.zenodo_url }}
+{{- if and (not $zenodo) .Params.doi (strings.HasPrefix .Params.doi "10.5281/zenodo.") }}
+  {{- $zenodo = printf "https://zenodo.org/records/%s" (strings.TrimPrefix "10.5281/zenodo." .Params.doi) }}
+{{- end }}
+
+{{- $affs := slice }}
+{{- range .Params.authors }}{{ with .affiliation }}{{ $affs = $affs | append . }}{{ end }}{{ end }}
+{{- $affs = $affs | uniq }}
+
+{{- $names := slice }}
+{{- range .Params.authors }}{{ $names = $names | append .name }}{{ end }}
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="{{ "/articles/" | relURL }}">Articles</a>
+  <span aria-hidden="true">/</span>
+  <span>Vol. {{ .Params.volume }}, No. {{ .Params.issue }}</span>
+</nav>
+
+<article>
+  <header class="panel hero">
+    <div class="chips">
+      {{ with .Params.article_type }}<span class="chip">{{ . }}</span>{{ end }}
+      <span class="chip chip--oa">{{ partial "icon-lock.html" . }} Open access</span>
+      {{ with .Params.license }}<span class="chip">{{ . }}</span>{{ end }}
+    </div>
+
+    <h1 class="hero__title">{{ .Title }}</h1>
+
+    <p class="hero__authors">
+      {{- range $i, $a := .Params.authors }}{{ if $i }}<span class="muted">, </span>{{ end -}}
+        {{- if $a.orcid }}<a href="https://orcid.org/{{ $a.orcid }}">{{ $a.name }}</a>{{ else }}<span>{{ $a.name }}</span>{{ end -}}
+      {{- end }}
+    </p>
+    {{ with $affs }}<p class="hero__affs">{{ delimit . " · " }}</p>{{ end }}
+
+    <p class="hero__meta">Published {{ .Date | time.Format ":date_long" }} · Vol. {{ .Params.volume }}, No. {{ .Params.issue }}</p>
+
+    <div class="actions">
+      {{ with .Params.pdf_url }}
+      <a class="btn btn--primary" href="{{ . }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download PDF
+        {{ with $.Params.pdf_size }}<span class="btn__note">{{ . }}</span>{{ end }}
+      </a>
+      {{ end }}
+      {{ with $zenodo }}
+      <a class="btn btn--ghost" href="{{ . }}">
+        View on Zenodo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+      </a>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="layout__main">
+      <section class="panel">
+        <h2 class="eyebrow">Abstract</h2>
+        <div class="abstract">{{ .Content }}</div>
+      </section>
+
+      {{ with .Params.keywords }}
+      <section class="panel">
+        <h2 class="eyebrow">Keywords</h2>
+        <div class="chips">{{ range . }}<span class="chip">{{ . }}</span>{{ end }}</div>
+      </section>
+      {{ end }}
+
+      <section class="panel">
+        <h2 class="eyebrow">How to cite</h2>
+        <p class="cite">{{ delimit $names "; " }} ({{ .Date.Format "2006" }}). {{ .Title }}. <em>{{ site.Title }}</em>, {{ .Params.volume }}({{ .Params.issue }}).{{ with .Params.doi }} https://doi.org/{{ . }}{{ end }}</p>
+        <div class="actions actions--tight">
+          <span class="muted">Export:</span>
+          {{ with .OutputFormats.Get "BibTeX" }}<a class="btn btn--small" href="{{ .RelPermalink }}" download>BibTeX</a>{{ end }}
+          {{ with .OutputFormats.Get "RIS" }}<a class="btn btn--small" href="{{ .RelPermalink }}" download>RIS</a>{{ end }}
+        </div>
+      </section>
+    </div>
+
+    <aside class="layout__side" aria-label="Metadata">
+      <section class="panel">
+        <h2 class="eyebrow">Identifiers</h2>
+        <dl class="facts">
+          {{ with .Params.doi }}
+          <div><dt>DOI</dt><dd class="mono"><a href="https://doi.org/{{ . }}">{{ . }}</a></dd></div>
+          {{ end }}
+          {{ with .Params.ark }}
+          <div><dt>Persistent link (ARK)</dt><dd class="mono">
+            {{ with site.Params.ark_resolver }}<a href="{{ . }}{{ $.Params.ark }}">{{ $.Params.ark }}</a>{{ else }}{{ . }}{{ end }}
+          </dd></div>
+          {{ end }}
+          {{ with site.Params.issn }}
+          <div><dt>ISSN</dt><dd class="mono">{{ . }}</dd></div>
+          {{ end }}
+          {{ with .Params.legacy_doi }}
+          <div class="facts__legacy"><dt>Previous DOI</dt><dd>
+            <span class="mono">{{ . }}</span>
+            <span class="note">Deactivated. This article is now identified by the current DOI.</span>
+          </dd></div>
+          {{ end }}
+        </dl>
+      </section>
+
+      <section class="panel">
+        <h2 class="eyebrow">Details</h2>
+        <dl class="facts">
+          <div><dt>Journal</dt><dd>{{ site.Title }}</dd></div>
+          <div><dt>Volume and issue</dt><dd>Vol. {{ .Params.volume }}, No. {{ .Params.issue }}</dd></div>
+          <div><dt>Published</dt><dd>{{ .Date | time.Format ":date_long" }}</dd></div>
+          {{ with .Params.article_type }}<div><dt>Type</dt><dd>{{ . }}</dd></div>{{ end }}
+          {{ with .Params.language }}<div><dt>Language</dt><dd>{{ index $languages . | default . }}</dd></div>{{ end }}
+          {{ with .Params.license }}
+          <div><dt>License</dt><dd>{{ with index $licenses . }}<a href="{{ . }}">{{ $.Params.license }}</a>{{ else }}{{ $.Params.license }}{{ end }}</dd></div>
+          {{ end }}
+        </dl>
+      </section>
+    </aside>
+  </div>
+</article>
+{{ end }}

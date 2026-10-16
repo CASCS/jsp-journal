@@ -1,0 +1,3 @@
+{{- $n := slice -}}
+{{- range .Params.authors }}{{ $n = $n | append .name }}{{ end -}}
+{{- delimit $n ", " " and " -}}

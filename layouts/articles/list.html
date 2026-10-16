@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="stack">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+  {{ range .Pages.GroupByParam "volume" "desc" }}
+    {{ $vol := .Key }}
+    {{ range .Pages.GroupByParam "issue" "desc" }}
+      <section class="stack" aria-labelledby="v{{ $vol }}n{{ .Key }}">
+        <h2 class="eyebrow" id="v{{ $vol }}n{{ .Key }}">Volume {{ $vol }} · Issue {{ .Key }}</h2>
+        {{ range .Pages.ByDate.Reverse }}
+          {{ partial "paper-card.html" . }}
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ else }}
+    <p class="muted">No articles published yet.</p>
+  {{ end }}
+</section>
+{{ end }}

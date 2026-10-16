@@ -1,0 +1,19 @@
+{{- $names := slice -}}
+{{- range .Params.authors }}{{ $names = $names | append .name }}{{ end -}}
+@article{ {{- .File.ContentBaseName -}},
+  title   = { {{ .Title }} },
+  author  = { {{ delimit $names " and " }} },
+  journal = { {{ site.Title }} },
+  year    = { {{ .Date.Format "2006" }} },
+  volume  = { {{ .Params.volume }} },
+  number  = { {{ .Params.issue }} },
+{{- with .Params.doi }}
+  doi     = { {{ . }} },
+{{- end }}
+{{- with site.Params.issn }}
+  issn    = { {{ . }} },
+{{- end }}
+{{- with .Params.pdf_url }}
+  url     = { {{ . }} },
+{{- end }}
+}

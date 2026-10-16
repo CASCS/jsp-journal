@@ -1,0 +1,109 @@
+# Configuración de Decap CMS.
+
+backend:
+  name: github
+  repo: TU-USUARIO/TU-REPOSITORIO   # Cámbialo por tu repositorio de GitHub
+  branch: main
+
+  # Si en lugar de OAuth de GitHub usas Netlify Identity + Git Gateway,
+  # sustituye todo el bloque backend por:
+  #   backend:
+  #     name: git-gateway
+  #     branch: main
+
+# Para editar en local con `npx decap-server` + `hugo server`:
+local_backend: true
+
+# Descomenta para que cada cambio pase por borrador > revisión > publicado (usa pull requests):
+# publish_mode: editorial_workflow
+
+locale: es
+media_folder: static/uploads
+public_folder: /uploads
+
+collections:
+  - name: articles
+    label: Artículos
+    label_singular: Artículo
+    folder: content/articles
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    summary: "Vol. {{volume}}, Núm. {{issue}} · {{title}}"
+    sortable_fields: ["date", "volume", "issue", "title"]
+    editor:
+      preview: false
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Fecha de publicación, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: Borrador (no publicar), name: draft, widget: boolean, default: false, required: false }
+      - label: Tipo de artículo
+        name: article_type
+        widget: select
+        options: ["Research Article", "Review Article", "Short Communication", "Brief Report"]
+        default: "Research Article"
+      - { label: Volumen, name: volume, widget: number, value_type: int, min: 1 }
+      - { label: Número, name: issue, widget: number, value_type: int, min: 1 }
+      - label: Autores
+        name: authors
+        widget: list
+        summary: "{{fields.name}}"
+        fields:
+          - { label: Nombre, name: name, widget: string }
+          - { label: Afiliación, name: affiliation, widget: string, required: false }
+          - label: ORCID
+            name: orcid
+            widget: string
+            required: false
+            hint: "Solo el identificador, por ejemplo 0000-0002-1825-0097"
+            pattern: ['^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$', "Formato: 0000-0000-0000-0000"]
+      - label: DOI actual (Zenodo)
+        name: doi
+        widget: string
+        required: false
+        hint: "Sin https://doi.org/. Ejemplo: 10.5281/zenodo.1234567"
+        pattern: ['^10\.\d{4,9}/\S+$', "Formato: 10.xxxx/xxxxx"]
+      - { label: ARK, name: ark, widget: string, required: false }
+      - { label: DOI anterior (inhabilitado), name: legacy_doi, widget: string, required: false }
+      - { label: URL del PDF en Zenodo, name: pdf_url, widget: string, required: false, hint: "Enlace directo al archivo, el que termina en .pdf" }
+      - { label: Tamaño del PDF, name: pdf_size, widget: string, required: false, hint: "Ejemplo: 1,2 MB" }
+      - { label: URL del registro de Zenodo, name: zenodo_url, widget: string, required: false, hint: "Si se deja vacío, se deduce del DOI" }
+      - label: Licencia
+        name: license
+        widget: select
+        options: ["CC BY 4.0", "CC BY-SA 4.0", "CC BY-NC 4.0", "CC BY-NC-SA 4.0", "CC BY-ND 4.0", "CC BY-NC-ND 4.0", "CC0 1.0"]
+        default: "CC BY 4.0"
+      - label: Idioma
+        name: language
+        widget: select
+        options:
+          - { label: Español, value: es }
+          - { label: Inglés, value: en }
+          - { label: Português, value: pt }
+          - { label: Francés, value: fr }
+        default: es
+      - { label: Palabras clave, name: keywords, widget: list, required: false }
+      - { label: Resumen, name: body, widget: markdown }
+
+  - name: paginas
+    label: Páginas
+    files:
+      - label: Portada (texto de presentación)
+        name: portada
+        file: content/_index.md
+        fields:
+          - { label: Título, name: title, widget: string }
+          - { label: Contenido, name: body, widget: markdown }
+      - label: Acerca de
+        name: acerca
+        file: content/about.md
+        fields:
+          - { label: Título, name: title, widget: string }
+          - { label: Contenido, name: body, widget: markdown }
+      - label: Normas para autores
+        name: normas
+        file: content/author-guidelines.md
+        fields:
+          - { label: Título, name: title, widget: string }
+          - { label: Contenido, name: body, widget: markdown }

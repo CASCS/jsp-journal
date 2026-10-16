@@ -1,0 +1,6 @@
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <span>{{ site.Title }}{{ with site.Params.issn }} · ISSN {{ . }}{{ end }}{{ with site.Params.publisher }} · {{ . }}{{ end }}</span>
+    {{ with site.Params.footer_note }}<span>{{ . }}</span>{{ end }}
+  </div>
+</footer>

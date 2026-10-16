@@ -1,0 +1,18 @@
+TY  - JOUR
+TI  - {{ .Title }}
+{{ range .Params.authors }}AU  - {{ .name }}
+{{ end -}}
+JO  - {{ site.Title }}
+PY  - {{ .Date.Format "2006" }}
+DA  - {{ .Date.Format "2006/01/02" }}
+VL  - {{ .Params.volume }}
+IS  - {{ .Params.issue }}
+{{ with .Params.doi }}DO  - {{ . }}
+{{ end -}}
+{{ with site.Params.issn }}SN  - {{ . }}
+{{ end -}}
+{{ with .Params.pdf_url }}UR  - {{ . }}
+{{ end -}}
+{{ range .Params.keywords }}KW  - {{ . }}
+{{ end -}}
+ER  -

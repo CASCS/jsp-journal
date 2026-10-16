@@ -1,0 +1,61 @@
+{{- /* Metaetiquetas Highwire (Google Scholar) y datos estructurados JSON-LD */ -}}
+<meta name="citation_title" content="{{ .Title }}">
+{{- range .Params.authors }}
+<meta name="citation_author" content="{{ .name }}">
+{{- with .affiliation }}
+<meta name="citation_author_institution" content="{{ . }}">
+{{- end }}
+{{- with .orcid }}
+<meta name="citation_author_orcid" content="https://orcid.org/{{ . }}">
+{{- end }}
+{{- end }}
+<meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+<meta name="citation_journal_title" content="{{ site.Title }}">
+{{- with site.Params.issn }}
+<meta name="citation_issn" content="{{ . }}">
+{{- end }}
+{{- with site.Params.publisher }}
+<meta name="citation_publisher" content="{{ . }}">
+{{- end }}
+<meta name="citation_volume" content="{{ .Params.volume }}">
+<meta name="citation_issue" content="{{ .Params.issue }}">
+{{- with .Params.doi }}
+<meta name="citation_doi" content="{{ . }}">
+{{- end }}
+{{- with .Params.pdf_url }}
+<meta name="citation_pdf_url" content="{{ . }}">
+{{- end }}
+<meta name="citation_abstract_html_url" content="{{ .Permalink }}">
+{{- with .Params.language }}
+<meta name="citation_language" content="{{ . }}">
+{{- end }}
+{{- with .Params.keywords }}
+<meta name="citation_keywords" content="{{ delimit . "; " }}">
+{{- end }}
+
+{{- $authors := slice }}
+{{- range .Params.authors }}
+  {{- $a := dict "@type" "Person" "name" .name }}
+  {{- with .orcid }}{{ $a = merge $a (dict "sameAs" (printf "https://orcid.org/%s" .)) }}{{ end }}
+  {{- with .affiliation }}{{ $a = merge $a (dict "affiliation" (dict "@type" "Organization" "name" .)) }}{{ end }}
+  {{- $authors = $authors | append $a }}
+{{- end }}
+{{- $periodical := dict "@type" "Periodical" "name" site.Title }}
+{{- with site.Params.issn }}{{ $periodical = merge $periodical (dict "issn" .) }}{{ end }}
+{{- $volume := dict "@type" "PublicationVolume" "volumeNumber" (string .Params.volume) "isPartOf" $periodical }}
+{{- $issue := dict "@type" "PublicationIssue" "issueNumber" (string .Params.issue) "isPartOf" $volume }}
+{{- $ld := dict
+    "@context" "https://schema.org"
+    "@type" "ScholarlyArticle"
+    "headline" .Title
+    "name" .Title
+    "url" .Permalink
+    "author" $authors
+    "datePublished" (.Date.Format "2006-01-02")
+    "isAccessibleForFree" true
+    "isPartOf" $issue }}
+{{- with .Params.language }}{{ $ld = merge $ld (dict "inLanguage" .) }}{{ end }}
+{{- with .Params.keywords }}{{ $ld = merge $ld (dict "keywords" .) }}{{ end }}
+{{- with .Params.doi }}{{ $ld = merge $ld (dict "sameAs" (printf "https://doi.org/%s" .)) }}{{ end }}
+{{- with .Params.pdf_url }}{{ $ld = merge $ld (dict "encoding" (dict "@type" "MediaObject" "contentUrl" . "encodingFormat" "application/pdf")) }}{{ end }}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>

@@ -1,0 +1,49 @@
+# Main site configuration.
+baseURL = "https://YOUR-SITE.netlify.app/"
+languageCode = "en"
+defaultContentLanguage = "en"
+title = "Journal Name"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+# An article dated "today" is published even when the Netlify build server (UTC)
+# is still on the previous day relative to the author's time zone.
+buildFuture = true
+
+[params]
+  description = "A diamond open access scientific journal, free for authors and readers."
+  issn = ""            # Example: "1234-5678". Hidden when empty.
+  publisher = ""       # Name of the publishing body (optional).
+  footer_note = "Non-profit, diamond open access journal with no fees for authors or readers."
+  ark_resolver = ""    # If your ARK has a public resolver, set it here (e.g. "https://n2t.net/"). Empty = the ARK is shown as plain text.
+
+[menus]
+  [[menus.main]]
+    name = "Articles"
+    pageRef = "/articles"
+    weight = 10
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 20
+  [[menus.main]]
+    name = "Author guidelines"
+    pageRef = "/author-guidelines"
+    weight = 30
+
+# Citation export: every article generates cita.bib and cita.ris.
+[mediaTypes."application/x-bibtex"]
+  suffixes = ["bib"]
+[mediaTypes."application/x-research-info-systems"]
+  suffixes = ["ris"]
+
+[outputFormats.BibTeX]
+  mediaType = "application/x-bibtex"
+  baseName = "cita"
+  isPlainText = true
+  notAlternative = true
+[outputFormats.RIS]
+  mediaType = "application/x-research-info-systems"
+  baseName = "cita"
+  isPlainText = true
+  notAlternative = true

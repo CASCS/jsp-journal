@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="panel intro">
+  <h1 class="page-title">{{ site.Title }}</h1>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ else }}{{ with site.Params.description }}<p class="intro__lead">{{ . }}</p>{{ end }}{{ end }}
+  <div class="chips">
+    <span class="chip chip--oa">{{ partial "icon-lock.html" . }} Open access</span>
+    {{ with site.Params.issn }}<span class="chip">ISSN {{ . }}</span>{{ end }}
+  </div>
+</section>
+
+<section class="stack">
+  <h2 class="eyebrow">Latest articles</h2>
+  {{ $papers := where site.RegularPages "Section" "articles" }}
+  {{ range first 6 $papers.ByDate.Reverse }}
+    {{ partial "paper-card.html" . }}
+  {{ else }}
+    <p class="muted">No articles published yet.</p>
+  {{ end }}
+  <p><a class="btn btn--ghost" href="{{ "/articles/" | relURL }}">View all articles</a></p>
+</section>
+{{ end }}

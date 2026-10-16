@@ -1,0 +1,12 @@
+<article class="card">
+  <div class="chips">
+    {{ with .Params.article_type }}<span class="chip">{{ . }}</span>{{ end }}
+    <span class="chip chip--oa">{{ partial "icon-lock.html" . }} Open access</span>
+  </div>
+  <h3 class="card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p class="card__authors">{{ partial "author-names.html" . }}</p>
+  <p class="card__meta">
+    Vol. {{ .Params.volume }}, No. {{ .Params.issue }} · {{ .Date | time.Format ":date_long" }}
+    {{ with .Params.doi }}· <span class="mono">DOI {{ . }}</span>{{ end }}
+  </p>
+</article>
