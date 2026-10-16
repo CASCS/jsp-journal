@@ -28,15 +28,7 @@ keywords:
 ---
 ### Abstract
 
-* **Purpose**
-
-  This study aimed to assess the effects of barbell (BBP) or dumbbell (DBP) bench press on one repetition maximum (1RM), increases in throwing performance, and transfer effect from one exercise to the other.
-* **Methods**
-
-  Thirty resistance-trained men (age, 22.9 ± 3.48 years; weight, 71.2 ± 7.7 kg; height, 172 ± 4.71 cm) were randomly assigned to either a BBP \[G1 (n = 16)] or DBP \[G2 (n = 14)] and completed two weekly training sessions at a relative percentage of the respective 1RM for 12 weeks. Study outcomes included strength levels measured using 1RM in BBP and DBP, and power measured by the seated medicine ball throw (SMBT) test.
-* **Results**
-
-  A significant main effect of time for 1RM BBP (F (1,28) = 212.952, p < 0.001, ω2 = 0.387), 1RM DBP (F (1,28) = 88.325, p < 0.001, ω2= 0.336), and SMBT (F (1,28) = 66.579, p = 0.001, ω2 = 0.241) was found. No significant interactions were observed between group and time for any of the dependent variables.
-* **Conclusion**
-
-  BBP and DBP exercises may be equally efficacious in improving upper-body strength and power in resistance-trained men.
+* **Purpose:** This study aimed to assess the effects of barbell (BBP) or dumbbell (DBP) bench press on one repetition maximum (1RM), increases in throwing performance, and transfer effect from one exercise to the other.
+* **Methods:** Thirty resistance-trained men (age, 22.9 ± 3.48 years; weight, 71.2 ± 7.7 kg; height, 172 ± 4.71 cm) were randomly assigned to either a BBP \[G1 (n = 16)] or DBP \[G2 (n = 14)] and completed two weekly training sessions at a relative percentage of the respective 1RM for 12 weeks. Study outcomes included strength levels measured using 1RM in BBP and DBP, and power measured by the seated medicine ball throw (SMBT) test.
+* **Results:** A significant main effect of time for 1RM BBP (F (1,28) = 212.952, p < 0.001, ω2 = 0.387), 1RM DBP (F (1,28) = 88.325, p < 0.001, ω2= 0.336), and SMBT (F (1,28) = 66.579, p = 0.001, ω2 = 0.241) was found. No significant interactions were observed between group and time for any of the dependent variables.
+* **Conclusion:** BBP and DBP exercises may be equally efficacious in improving upper-body strength and power in resistance-trained men.
