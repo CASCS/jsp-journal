@@ -1,7 +1,7 @@
 ---
 title: Randomized Trial Comparing Barbell and Dumbbell Bench Press on Maximal
   Strength and Power Output
-date: 2026-10-16
+date: 2023-05-09
 draft: true
 article_type: Research Article
 volume: 1
