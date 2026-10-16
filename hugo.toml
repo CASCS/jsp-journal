@@ -1,8 +1,8 @@
 # Main site configuration.
-baseURL = "https://YOUR-SITE.netlify.app/"
+baseURL = "https://jsp-journal.netlify.app/"
 languageCode = "en"
 defaultContentLanguage = "en"
-title = "Journal Name"
+title = "Journal of Strenthg and Conditioning"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
@@ -12,10 +12,10 @@ buildFuture = true
 
 [params]
   description = "A diamond open access scientific journal, free for authors and readers."
-  issn = ""            # Example: "1234-5678". Hidden when empty.
-  publisher = ""       # Name of the publishing body (optional).
+  issn = "2436-9810"            # Example: "1234-5678". Hidden when empty.
+  publisher = "Centre for Applied Strength and Conditioning Science"       # Name of the publishing body (optional).
   footer_note = "Non-profit, diamond open access journal with no fees for authors or readers."
-  ark_resolver = ""    # If your ARK has a public resolver, set it here (e.g. "https://n2t.net/"). Empty = the ARK is shown as plain text.
+  ark_resolver = "ark:/57464"    # If your ARK has a public resolver, set it here (e.g. "https://n2t.net/"). Empty = the ARK is shown as plain text.
 
 [menus]
   [[menus.main]]
