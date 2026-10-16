@@ -4,7 +4,7 @@ title: Randomized Trial Comparing Barbell and Dumbbell Bench Press on Maximal
 date: 2023-05-09
 draft: true
 article_type: Research Article
-volume: 1
+volume: 2
 issue: 1
 authors:
   - name: Yonathan Smoak
