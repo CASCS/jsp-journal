@@ -1,5 +1,4 @@
 ---
 title: "[Journal name]"
 ---
-
-[Introductory text for the journal: scope, audience and editorial focus.]
+A modern platform for rapid, transparent, and high‑quality research dissemination
