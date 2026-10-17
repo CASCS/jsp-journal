@@ -7,7 +7,7 @@ items:
     logo: /uploads/idpir-cayp_logos.png
   - name: OpenAlex
     url: https://openalex.org
-    logo: ""
+    logo: https://cdn.brandfetch.io/idfp5U93sg/w/520/h/488/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B
   - name: DataCite
     url: https://datacite.org
     logo: ""
