@@ -29,7 +29,7 @@ collections:
     create: true
     extension: md
     format: yaml-frontmatter
-    slug: "{{slug}}"
+    slug: "{{fields.zenodo_id}}"
     summary: "Vol. {{volume}}, Núm. {{issue}} · {{title}}"
     sortable_fields: ["date", "volume", "issue", "title"]
     editor:
@@ -70,6 +70,11 @@ collections:
           min: 1,
         }
       - { label: Número, name: issue, widget: number, value_type: int, min: 1 }
+      - label: Número de registro de Zenodo
+        name: zenodo_id
+        widget: string
+        pattern: ['^\d+$', "Solo dígitos"]
+        hint: "Los dígitos finales del DOI. Ejemplo: 10.5281/zenodo.6992436 → 6992436. Usa el DOI general (concept DOI), que no cambia con las versiones nuevas. Define la dirección web (/articles/6992436/), completa el DOI y forma el ARK (ark:/57464/jsp/v1.i1/6992436). No lo cambies después de publicar."
       - label: Autores
         name: authors
         widget: list
@@ -110,9 +115,13 @@ collections:
         name: doi
         widget: string
         required: false
-        hint: "Sin https://doi.org/. Ejemplo: 10.5281/zenodo.1234567"
+        hint: "Déjalo vacío: se completa solo con el número de Zenodo. Úsalo únicamente si el DOI no es de Zenodo."
         pattern: ['^10\.\d{4,9}/\S+$', "Formato: 10.xxxx/xxxxx"]
-      - { label: ARK, name: ark, widget: string, required: false }
+      - label: ARK (opcional)
+        name: ark
+        widget: string
+        required: false
+        hint: "Déjalo vacío: se genera solo con el volumen, el número y el número de Zenodo. Escríbelo solo si el artículo ya tiene un ARK que no sigue ese patrón."
       - {
           label: DOI anterior (inhabilitado),
           name: legacy_doi,
@@ -164,6 +173,11 @@ collections:
           - { label: Francés, value: fr }
         default: es
       - { label: Palabras clave, name: keywords, widget: list, required: false }
+      - label: Direcciones antiguas (redirigen al artículo)
+        name: aliases
+        widget: list
+        required: false
+        hint: "Solo para artículos que cambiaron de dirección. Ejemplo: /articles/titulo-largo-anterior/"
       - { label: Resumen, name: body, widget: markdown }
 
   - name: pages
