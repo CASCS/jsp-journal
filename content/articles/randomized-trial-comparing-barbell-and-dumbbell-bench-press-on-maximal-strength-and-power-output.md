@@ -10,6 +10,8 @@ authors:
   - name: Yonathan Smoak
     orcid: 0000-0002-8842-8030
     affiliation: Centre for Applied Strength and Conditioning Science
+    given: Yonathan
+    family: Smoak
 doi: 10.5281/zenodo.23319268
 ark: ark:/57464/jsp/v2.i1/0001
 legacy_doi: 10.21428/6404b16e.2ce996b2
