@@ -104,11 +104,6 @@
             <span class="idbadge"><span class="idbadge__label">ARK</span>{{ with site.Params.ark_resolver }}<a class="idbadge__value" href="{{ . }}{{ $.Params.ark }}">{{ $.Params.ark }}</a>{{ else }}<span class="idbadge__value">{{ . }}</span>{{ end }}</span>
           </dd></div>
           {{ end }}
-          {{ with site.Params.issn }}
-          <div><dt>ISSN</dt><dd>
-            <span class="idbadge"><span class="idbadge__label">ISSN</span><span class="idbadge__value">{{ . }}</span></span>
-          </dd></div>
-          {{ end }}
           {{ with .Params.legacy_doi }}
           <div class="facts__legacy"><dt>Previous DOI</dt><dd>
             <span class="idbadge idbadge--muted"><span class="idbadge__label">DOI</span><span class="idbadge__value">{{ . }}</span></span>
@@ -122,6 +117,7 @@
         <h2 class="eyebrow">Details</h2>
         <dl class="facts">
           <div><dt>Journal</dt><dd>{{ site.Title }}</dd></div>
+          {{ with site.Params.issn }}<div><dt>ISSN</dt><dd>{{ . }}</dd></div>{{ end }}
           <div><dt>Volume and issue</dt><dd>Vol. {{ .Params.volume }}, No. {{ .Params.issue }}</dd></div>
           <div><dt>Published</dt><dd>{{ .Date | time.Format ":date_long" }}</dd></div>
           {{ with .Params.article_type }}<div><dt>Type</dt><dd>{{ . }}</dd></div>{{ end }}
