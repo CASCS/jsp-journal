@@ -229,6 +229,19 @@ main .home-section:first-child { padding-top: 16px; }
   .indexing__item { flex: 1 1 140px; }
 }
 
+/* Identificadores en recuadro (DOI, ARK, ISSN) */
+.facts--stacked > div { flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 6px; }
+.facts--stacked dt, .facts--stacked dd { flex: none; max-width: 100%; }
+.idbadge {
+  display: inline-flex; max-width: 100%;
+  border-radius: 4px; overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; line-height: 1.4;
+}
+.idbadge__label { flex: none; background: #4b5563; color: #fff; padding: 4px 8px; font-weight: 500; }
+.idbadge__value { min-width: 0; background: #1f4fbf; color: #fff; padding: 4px 10px; overflow-wrap: anywhere; text-decoration: none; }
+a.idbadge__value:hover { filter: brightness(0.9); text-decoration: underline; }
+a.idbadge__value:focus-visible { outline: 2px solid #111827; outline-offset: 2px; }
+.idbadge--muted .idbadge__value { background: #e5e7eb; color: #111827; text-decoration: line-through; }
 /* Pie de página: espacio vertical y posición al final de la ventana */
 body { min-height: 100vh; display: flex; flex-direction: column; }
 main.wrap { flex: 1 0 auto; width: 100%; }
