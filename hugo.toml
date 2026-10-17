@@ -2,7 +2,7 @@
 baseURL = "https://jsp-journal.netlify.app/"
 languageCode = "en"
 defaultContentLanguage = "en"
-title = "Journal of Strenthg and Conditioning"
+title = "Journal of Strength and Performance"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
@@ -30,6 +30,13 @@ buildFuture = true
     name = "Author guidelines"
     pageRef = "/author-guidelines"
     weight = 30
+
+
+# Pages created in Decap live in content/pages/ but are published at the site root:
+# content/pages/editorial-policy.md -> /editorial-policy/
+[permalinks]
+  pages = "/:filename/"
+
 
 # Citation export: every article generates cita.bib and cita.ris.
 [mediaTypes."application/x-bibtex"]
