@@ -1,13 +1,10 @@
 items:
-  - name: Google Scholar
-    url: https://scholar.google.com
-    logo: /uploads/google-scholar.png
   - name: Zenodo
     url: https://zenodo.org
     logo: ""
   - name: OpenAIRE
     url: https://www.openaire.eu
-    logo: ""
+    logo: /uploads/idpir-cayp_logos.png
   - name: OpenAlex
     url: https://openalex.org
     logo: ""
