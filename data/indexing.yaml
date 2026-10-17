@@ -1,0 +1,20 @@
+# Services where the journal can be found. It is shown in the footer area of the
+# home page and on the About page. Edit it from Decap (Páginas fijas > Indexación).
+# Keep only the services where the journal actually appears.
+# "logo" is optional: without it, the name is shown as text.
+items:
+  - name: "Google Scholar"
+    url: "https://scholar.google.com"
+    logo: ""
+  - name: "Zenodo"
+    url: "https://zenodo.org"
+    logo: ""
+  - name: "OpenAIRE"
+    url: "https://www.openaire.eu"
+    logo: ""
+  - name: "OpenAlex"
+    url: "https://openalex.org"
+    logo: ""
+  - name: "DataCite"
+    url: "https://datacite.org"
+    logo: ""
