@@ -149,6 +149,43 @@ collections:
       - { label: Palabras clave, name: keywords, widget: list, required: false }
       - { label: Resumen, name: body, widget: markdown }
 
+  - name: pages
+    label: Páginas nuevas
+    label_singular: Página
+    folder: content/pages
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    editor:
+      preview: false
+    fields:
+      - { label: Título, name: title, widget: string }
+      - {
+          label: Borrador (no publicar),
+          name: draft,
+          widget: boolean,
+          default: false,
+          required: false,
+        }
+      - label: Mostrar en el menú principal
+        name: menus
+        widget: select
+        required: false
+        options:
+          - { label: "Sí, mostrar en el menú", value: main }
+      - {
+          label: Posición en el menú,
+          name: weight,
+          widget: number,
+          value_type: int,
+          default: 40,
+          required: false,
+          hint: "Menor = más a la izquierda. Los menús fijos usan 10, 20 y 30.",
+        }
+      - { label: Contenido, name: body, widget: markdown }
+
   - name: paginas
     label: Páginas
     files:
@@ -170,3 +207,27 @@ collections:
         fields:
           - { label: Título, name: title, widget: string }
           - { label: Contenido, name: body, widget: markdown }
+
+      - label: Indexación (logos de la portada y de About)
+        name: indexing
+        file: data/indexing.yaml
+        fields:
+          - label: Servicios
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Nombre, name: name, widget: string }
+              - {
+                  label: Enlace,
+                  name: url,
+                  widget: string,
+                  hint: "Página de la revista en ese servicio o, si no la tienes, la página principal del servicio",
+                }
+              - {
+                  label: Logo,
+                  name: logo,
+                  widget: image,
+                  required: false,
+                  hint: "Logo oficial del servicio. Si se deja vacío, se muestra el nombre como texto.",
+                }
