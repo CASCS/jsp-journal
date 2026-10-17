@@ -7,6 +7,7 @@
 {{- if and .IsPage .Plain }}{{ $desc = .Plain | truncate 200 }}{{ end }}
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ site.Params.favicon | default "/images/favicon.svg" | relURL }}">
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url" content="{{ .Permalink }}">

@@ -1,0 +1,12 @@
+{{- with site.Data.indexing.items }}
+<ul class="indexing" role="list">
+  {{- range . }}
+  {{- $item := . }}
+  <li>
+    <a class="indexing__item" href="{{ .url }}" rel="noopener">
+      {{- with .logo }}<img src="{{ . | relURL }}" alt="{{ $item.name }}" loading="lazy">{{ else }}<span>{{ $item.name }}</span>{{ end -}}
+    </a>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}

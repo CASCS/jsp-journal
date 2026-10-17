@@ -7,6 +7,7 @@
 <body>
 <a class="skip" href="#content">Skip to content</a>
 {{ partial "header.html" . }}
+{{ block "hero" . }}{{ end }}
 <main id="content" class="wrap">
 {{ block "main" . }}{{ end }}
 </main>

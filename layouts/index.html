@@ -1,14 +1,23 @@
-{{ define "main" }}
-<section class="panel intro">
-  <h1 class="page-title">{{ site.Title }}</h1>
-  {{ with .Content }}<div class="prose">{{ . }}</div>{{ else }}{{ with site.Params.description }}<p class="intro__lead">{{ . }}</p>{{ end }}{{ end }}
-  <div class="chips">
-    <span class="chip chip--oa">{{ partial "icon-lock.html" . }} Open access</span>
-    {{ with site.Params.issn }}<span class="chip">ISSN {{ . }}</span>{{ end }}
+{{ define "hero" }}
+<section class="hero-band" aria-labelledby="journal-title">
+  <div class="wrap hero-band__inner">
+    <p class="hero-band__eyebrow">{{ site.Params.eyebrow | default "Open access journal" }}</p>
+    <h1 class="hero-band__title" id="journal-title">{{ site.Title }}</h1>
+    {{ with .Content }}<div class="hero-band__lead">{{ . }}</div>{{ else }}{{ with site.Params.description }}<div class="hero-band__lead"><p>{{ . }}</p></div>{{ end }}{{ end }}
+    <div class="chips">
+      <span class="chip chip--oa">{{ partial "icon-lock.html" . }} Open access</span>
+      {{ with site.Params.issn }}<span class="chip">ISSN {{ . }}</span>{{ end }}
+    </div>
+    <div class="actions">
+      <a class="btn btn--light" href="{{ "/articles/" | relURL }}">Browse articles</a>
+      <a class="btn btn--outline-light" href="{{ "/author-guidelines/" | relURL }}">Author guidelines</a>
+    </div>
   </div>
 </section>
+{{ end }}
 
-<section class="stack">
+{{ define "main" }}
+<section class="stack home-section">
   <h2 class="eyebrow">Latest articles</h2>
   {{ $papers := where site.RegularPages "Section" "articles" }}
   {{ range first 6 $papers.ByDate.Reverse }}
@@ -18,4 +27,11 @@
   {{ end }}
   <p><a class="btn btn--ghost" href="{{ "/articles/" | relURL }}">View all articles</a></p>
 </section>
+
+{{ if site.Data.indexing.items }}
+<section class="stack home-section" aria-labelledby="found-in">
+  <h2 class="eyebrow" id="found-in">Find the journal in</h2>
+  {{ partial "indexing.html" . }}
+</section>
+{{ end }}
 {{ end }}

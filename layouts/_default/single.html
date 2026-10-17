@@ -1,6 +1,15 @@
 {{ define "main" }}
+{{- /* The indexing logos show on the About page by default; any page can set show_indexing: true/false. */ -}}
+{{- $show := .Params.show_indexing }}
+{{- if eq $show nil }}{{ $show = eq .File.ContentBaseName "about" }}{{ end }}
 <article class="panel">
   <h1 class="page-title">{{ .Title }}</h1>
   <div class="prose">{{ .Content }}</div>
+  {{ if and $show site.Data.indexing.items }}
+  <section class="about-indexing" aria-labelledby="indexed-in">
+    <h2 class="eyebrow" id="indexed-in">Indexing and discovery</h2>
+    {{ partial "indexing.html" . }}
+  </section>
+  {{ end }}
 </article>
 {{ end }}
