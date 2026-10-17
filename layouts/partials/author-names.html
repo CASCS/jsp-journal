@@ -1,3 +1,8 @@
+{{- /* Display names ("Given Family") for cards. Older articles with a single "name" field still work. */ -}}
 {{- $n := slice -}}
-{{- range .Params.authors }}{{ $n = $n | append .name }}{{ end -}}
+{{- range .Params.authors -}}
+  {{- $full := .name -}}
+  {{- if .family -}}{{- $full = strings.Trim (printf "%s %s" (.given | default "") .family) " " -}}{{- end -}}
+  {{- $n = $n | append $full -}}
+{{- end -}}
 {{- delimit $n ", " " and " -}}

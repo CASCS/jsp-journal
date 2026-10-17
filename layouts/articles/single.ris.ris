@@ -1,6 +1,6 @@
 TY  - JOUR
 TI  - {{ .Title }}
-{{ range .Params.authors }}AU  - {{ .name }}
+{{ range .Params.authors }}AU  - {{ if .family }}{{ .family }}{{ with .given }}, {{ . }}{{ end }}{{ else }}{{ .name }}{{ end }}
 {{ end -}}
 JO  - {{ site.Title }}
 PY  - {{ .Date.Format "2006" }}

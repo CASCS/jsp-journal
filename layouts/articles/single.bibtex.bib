@@ -1,5 +1,11 @@
 {{- $names := slice -}}
-{{- range .Params.authors }}{{ $names = $names | append .name }}{{ end -}}
+{{- range .Params.authors -}}
+  {{- if .family -}}
+    {{- if .given -}}{{- $names = $names | append (printf "%s, %s" .family .given) -}}{{- else -}}{{- $names = $names | append .family -}}{{- end -}}
+  {{- else -}}
+    {{- $names = $names | append .name -}}
+  {{- end -}}
+{{- end -}}
 @article{ {{- .File.ContentBaseName -}},
   title   = { {{ .Title }} },
   author  = { {{ delimit $names " and " }} },

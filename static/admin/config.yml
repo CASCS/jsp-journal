@@ -73,9 +73,20 @@ collections:
       - label: Autores
         name: authors
         widget: list
-        summary: "{{fields.name}}"
+        summary: "{{fields.family}}, {{fields.given}}"
         fields:
-          - { label: Nombre, name: name, widget: string }
+          - {
+              label: Nombre(s),
+              name: given,
+              widget: string,
+              hint: "Nombre de pila. Ejemplo: Yonathan",
+            }
+          - {
+              label: Apellido(s),
+              name: family,
+              widget: string,
+              hint: "Ejemplo: Smoak",
+            }
           - {
               label: Afiliación,
               name: affiliation,
@@ -89,6 +100,12 @@ collections:
             hint: "Solo el identificador, por ejemplo 0000-0002-1825-0097"
             pattern:
               ['^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$', "Formato: 0000-0000-0000-0000"]
+          - {
+              label: Nombre completo (formato anterior),
+              name: name,
+              widget: hidden,
+              required: false,
+            }
       - label: DOI actual (Zenodo)
         name: doi
         widget: string

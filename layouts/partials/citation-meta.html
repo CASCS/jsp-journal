@@ -1,7 +1,9 @@
-{{- /* Metaetiquetas Highwire (Google Scholar) y datos estructurados JSON-LD */ -}}
+{{- /* Highwire meta tags (Google Scholar) and JSON-LD structured data */ -}}
 <meta name="citation_title" content="{{ .Title }}">
 {{- range .Params.authors }}
-<meta name="citation_author" content="{{ .name }}">
+{{- $cite := .name }}
+{{- if .family }}{{ if .given }}{{ $cite = printf "%s, %s" .family .given }}{{ else }}{{ $cite = .family }}{{ end }}{{ end }}
+<meta name="citation_author" content="{{ $cite }}">
 {{- with .affiliation }}
 <meta name="citation_author_institution" content="{{ . }}">
 {{- end }}
@@ -35,7 +37,11 @@
 
 {{- $authors := slice }}
 {{- range .Params.authors }}
-  {{- $a := dict "@type" "Person" "name" .name }}
+  {{- $full := .name }}
+  {{- if .family }}{{ $full = strings.Trim (printf "%s %s" (.given | default "") .family) " " }}{{ end }}
+  {{- $a := dict "@type" "Person" "name" $full }}
+  {{- if .family }}{{ $a = merge $a (dict "familyName" .family) }}{{ end }}
+  {{- with .given }}{{ $a = merge $a (dict "givenName" .) }}{{ end }}
   {{- with .orcid }}{{ $a = merge $a (dict "sameAs" (printf "https://orcid.org/%s" .)) }}{{ end }}
   {{- with .affiliation }}{{ $a = merge $a (dict "affiliation" (dict "@type" "Organization" "name" .)) }}{{ end }}
   {{- $authors = $authors | append $a }}

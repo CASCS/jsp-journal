@@ -1,0 +1,12 @@
+{{- /* Initials in APA style from given names: "Jean-Pierre" -> "J.-P.", "María José" -> "M. J." */ -}}
+{{- $out := slice -}}
+{{- range split (strings.Trim . " ") " " -}}
+  {{- if . -}}
+    {{- $parts := slice -}}
+    {{- range split . "-" -}}
+      {{- if . -}}{{- $parts = $parts | append (printf "%s." (upper (substr . 0 1))) -}}{{- end -}}
+    {{- end -}}
+    {{- $out = $out | append (delimit $parts "-") -}}
+  {{- end -}}
+{{- end -}}
+{{- delimit $out " " -}}

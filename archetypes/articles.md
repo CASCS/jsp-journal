@@ -6,7 +6,8 @@ article_type: "Research Article"
 volume: 1
 issue: 1
 authors:
-  - name: ""
+  - given: ""
+    family: ""
     affiliation: ""
     orcid: ""
 doi: ""

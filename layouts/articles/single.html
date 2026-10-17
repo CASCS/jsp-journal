@@ -21,9 +21,6 @@
 {{- range .Params.authors }}{{ with .affiliation }}{{ $affs = $affs | append . }}{{ end }}{{ end }}
 {{- $affs = $affs | uniq }}
 
-{{- $names := slice }}
-{{- range .Params.authors }}{{ $names = $names | append .name }}{{ end }}
-
 <nav class="crumbs" aria-label="Breadcrumb">
   <a href="{{ "/articles/" | relURL }}">Articles</a>
   <span aria-hidden="true">/</span>
@@ -42,7 +39,9 @@
 
     <p class="hero__authors">
       {{- range $i, $a := .Params.authors }}{{ if $i }}<span class="muted">, </span>{{ end -}}
-        {{- if $a.orcid }}<a href="https://orcid.org/{{ $a.orcid }}">{{ $a.name }}</a>{{ else }}<span>{{ $a.name }}</span>{{ end -}}
+        {{- $full := $a.name }}
+        {{- if $a.family }}{{ $full = strings.Trim (printf "%s %s" ($a.given | default "") $a.family) " " }}{{ end -}}
+        {{- if $a.orcid }}<a href="https://orcid.org/{{ $a.orcid }}">{{ $full }}</a>{{ else }}<span>{{ $full }}</span>{{ end -}}
       {{- end }}
     </p>
     {{ with $affs }}<p class="hero__affs">{{ delimit . " · " }}</p>{{ end }}
@@ -82,7 +81,7 @@
 
       <section class="panel">
         <h2 class="eyebrow">How to cite</h2>
-        <p class="cite">{{ delimit $names "; " }} ({{ .Date.Format "2006" }}). {{ .Title }}. <em>{{ site.Title }}</em>, {{ .Params.volume }}({{ .Params.issue }}).{{ with .Params.doi }} https://doi.org/{{ . }}{{ end }}</p>
+        <p class="cite">{{ partial "cite-authors.html" . }} ({{ .Date.Format "2006" }}). {{ .Title }}. <em>{{ site.Title }}</em>, {{ .Params.volume }}({{ .Params.issue }}).{{ with .Params.doi }} https://doi.org/{{ . }}{{ end }}</p>
         <div class="actions actions--tight">
           <span class="muted">Export:</span>
           {{ with .OutputFormats.Get "BibTeX" }}<a class="btn btn--small" href="{{ .RelPermalink }}" download>BibTeX</a>{{ end }}
@@ -94,21 +93,25 @@
     <aside class="layout__side" aria-label="Metadata">
       <section class="panel">
         <h2 class="eyebrow">Identifiers</h2>
-        <dl class="facts">
+        <dl class="facts facts--stacked">
           {{ with .Params.doi }}
-          <div><dt>DOI</dt><dd class="mono"><a href="https://doi.org/{{ . }}">{{ . }}</a></dd></div>
+          <div><dt>DOI</dt><dd>
+            <span class="idbadge"><span class="idbadge__label">DOI</span><a class="idbadge__value" href="https://doi.org/{{ . }}">{{ . }}</a></span>
+          </dd></div>
           {{ end }}
           {{ with .Params.ark }}
-          <div><dt>Persistent link (ARK)</dt><dd class="mono">
-            {{ with site.Params.ark_resolver }}<a href="{{ . }}{{ $.Params.ark }}">{{ $.Params.ark }}</a>{{ else }}{{ . }}{{ end }}
+          <div><dt>Persistent link (ARK)</dt><dd>
+            <span class="idbadge"><span class="idbadge__label">ARK</span>{{ with site.Params.ark_resolver }}<a class="idbadge__value" href="{{ . }}{{ $.Params.ark }}">{{ $.Params.ark }}</a>{{ else }}<span class="idbadge__value">{{ . }}</span>{{ end }}</span>
           </dd></div>
           {{ end }}
           {{ with site.Params.issn }}
-          <div><dt>ISSN</dt><dd class="mono">{{ . }}</dd></div>
+          <div><dt>ISSN</dt><dd>
+            <span class="idbadge"><span class="idbadge__label">ISSN</span><span class="idbadge__value">{{ . }}</span></span>
+          </dd></div>
           {{ end }}
           {{ with .Params.legacy_doi }}
           <div class="facts__legacy"><dt>Previous DOI</dt><dd>
-            <span class="mono">{{ . }}</span>
+            <span class="idbadge idbadge--muted"><span class="idbadge__label">DOI</span><span class="idbadge__value">{{ . }}</span></span>
             <span class="note">Deactivated. This article is now identified by the current DOI.</span>
           </dd></div>
           {{ end }}
