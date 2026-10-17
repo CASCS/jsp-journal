@@ -11,3 +11,6 @@ items:
   - name: DataCite
     url: https://datacite.org
     logo: https://cdn.brandfetch.io/idiKr4mmSS/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B
+  - name: ROAD
+    logo: /uploads/road-issn-1-.png
+    url: https://publishers.issn.org/resource/ISSN/2436-9810
