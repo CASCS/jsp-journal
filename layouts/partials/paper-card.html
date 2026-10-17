@@ -7,6 +7,6 @@
   <p class="card__authors">{{ partial "author-names.html" . }}</p>
   <p class="card__meta">
     Vol. {{ .Params.volume }}, No. {{ .Params.issue }} · {{ .Date | time.Format ":date_long" }}
-    {{ with .Params.doi }}· <span class="mono">DOI {{ . }}</span>{{ end }}
+    {{ with (partial "article-ids.html" .).doi }}· <span class="mono">DOI {{ . }}</span>{{ end }}
   </p>
 </article>

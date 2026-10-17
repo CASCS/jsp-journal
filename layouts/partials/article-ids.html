@@ -1,0 +1,16 @@
+{{- /*
+  Returns the identifiers of an article as a dict: doi and ark.
+  - DOI: the "doi" field if present; otherwise built from "zenodo_id" (10.5281/zenodo.<id>).
+  - ARK: the "ark" field if present (manual override); otherwise generated as
+    ark:/<ark_naan>/<ark_shoulder>/v<volume>.i<issue>/<zenodo_id>
+    Nothing is generated if ark_naan or ark_shoulder are not set in hugo.toml.
+*/ -}}
+{{- $doi := .Params.doi -}}
+{{- with .Params.zenodo_id -}}
+  {{- if not $doi -}}{{- $doi = printf "10.5281/zenodo.%s" (string .) -}}{{- end -}}
+{{- end -}}
+{{- $ark := .Params.ark -}}
+{{- if and (not $ark) site.Params.ark_naan site.Params.ark_shoulder .Params.volume .Params.issue .Params.zenodo_id -}}
+  {{- $ark = printf "ark:/%s/%s/v%d.i%d/%s" (string site.Params.ark_naan) site.Params.ark_shoulder (int .Params.volume) (int .Params.issue) (string .Params.zenodo_id) -}}
+{{- end -}}
+{{- return (dict "doi" $doi "ark" $ark) -}}

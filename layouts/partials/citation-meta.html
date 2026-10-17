@@ -21,7 +21,7 @@
 {{- end }}
 <meta name="citation_volume" content="{{ .Params.volume }}">
 <meta name="citation_issue" content="{{ .Params.issue }}">
-{{- with .Params.doi }}
+{{- with (partial "article-ids.html" .).doi }}
 <meta name="citation_doi" content="{{ . }}">
 {{- end }}
 {{- with .Params.pdf_url }}
@@ -62,6 +62,6 @@
     "isPartOf" $issue }}
 {{- with .Params.language }}{{ $ld = merge $ld (dict "inLanguage" .) }}{{ end }}
 {{- with .Params.keywords }}{{ $ld = merge $ld (dict "keywords" .) }}{{ end }}
-{{- with .Params.doi }}{{ $ld = merge $ld (dict "sameAs" (printf "https://doi.org/%s" .)) }}{{ end }}
+{{- with (partial "article-ids.html" .).doi }}{{ $ld = merge $ld (dict "sameAs" (printf "https://doi.org/%s" .)) }}{{ end }}
 {{- with .Params.pdf_url }}{{ $ld = merge $ld (dict "encoding" (dict "@type" "MediaObject" "contentUrl" . "encodingFormat" "application/pdf")) }}{{ end }}
 <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>

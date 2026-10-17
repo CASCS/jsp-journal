@@ -13,7 +13,7 @@
   year    = { {{ .Date.Format "2006" }} },
   volume  = { {{ .Params.volume }} },
   number  = { {{ .Params.issue }} },
-{{- with .Params.doi }}
+{{- with (partial "article-ids.html" .).doi }}
   doi     = { {{ . }} },
 {{- end }}
 {{- with site.Params.issn }}

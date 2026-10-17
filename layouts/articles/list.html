@@ -1,4 +1,14 @@
 {{ define "main" }}
+{{- /* Two articles must never share an ARK: stop the build and say which ones. */ -}}
+{{- $seen := dict }}
+{{- range .Pages }}
+  {{- $p := . }}
+  {{- $a := (partial "article-ids.html" $p).ark }}
+  {{- if $a }}
+    {{- with index $seen $a }}{{ errorf "Duplicate ARK %s in %s and %s. Check volume, issue and Zenodo number." $a . $p.File.Path }}{{ end }}
+    {{- $seen = merge $seen (dict $a $p.File.Path) }}
+  {{- end }}
+{{- end }}
 <section class="stack">
   <h1 class="page-title">{{ .Title }}</h1>
   {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}

@@ -7,7 +7,7 @@ PY  - {{ .Date.Format "2006" }}
 DA  - {{ .Date.Format "2006/01/02" }}
 VL  - {{ .Params.volume }}
 IS  - {{ .Params.issue }}
-{{ with .Params.doi }}DO  - {{ . }}
+{{ with (partial "article-ids.html" .).doi }}DO  - {{ . }}
 {{ end -}}
 {{ with site.Params.issn }}SN  - {{ . }}
 {{ end -}}
