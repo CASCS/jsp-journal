@@ -206,15 +206,22 @@ collections:
         required: false
         options:
           - { label: "Sí, mostrar en el menú", value: main }
-      - {
-          label: Posición en el menú,
-          name: weight,
-          widget: number,
-          value_type: int,
-          default: 40,
-          required: false,
-          hint: "Menor = más a la izquierda. Los menús fijos usan 10, 20 y 30.",
-        }
+      - label: Mostrar como submenú de
+        name: menu_parent
+        widget: select
+        required: false
+        options:
+          - { label: Acerca de, value: "/about/" }
+          - { label: Normas para autores, value: "/author-guidelines/" }
+          - { label: Artículos, value: "/articles/" }
+        hint: "Si eliges una página, esta aparece dentro de su menú desplegable. En ese caso deja vacío «Mostrar en el menú principal»."
+      - label: Posición en el menú
+        name: weight
+        widget: number
+        value_type: int
+        default: 40
+        required: false
+        hint: "Menor = más a la izquierda. Los menús fijos usan 10, 20 y 30."
       - { label: Contenido, name: body, widget: markdown }
 
   - name: paginas
