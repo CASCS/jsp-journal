@@ -8,7 +8,7 @@ weight: 40
 
 ## About the Journal
 
-| Campo | Detalle |
+
 | :--- | :--- |
 | **Journal Title** | Journal of Strength and Performance |
 | **Journal Abbreviation** | J Strength Perf |
