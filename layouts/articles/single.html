@@ -104,7 +104,7 @@
           {{ end }}
           {{ with $ark }}
           <div><dt>Persistent link (ARK)</dt><dd>
-            <span class="idbadge"><span class="idbadge__label">ARK</span>{{ with site.Params.ark_resolver }}<a class="idbadge__value" href="{{ . }}{{ $ark }}">{{ $ark }}</a>{{ else }}<span class="idbadge__value">{{ $ark }}</span>{{ end }}</span>
+            <span class="idbadge"><span class="idbadge__label">ARK</span>{{ with site.Params.ark_resolver }}<a class="idbadge__value" href="{{ printf "%s%s" . $ark | safeURL }}">{{ $ark }}</a>{{ else }}<span class="idbadge__value">{{ $ark }}</span>{{ end }}</span>
           </dd></div>
           {{ end }}
           {{ with .Params.legacy_doi }}
