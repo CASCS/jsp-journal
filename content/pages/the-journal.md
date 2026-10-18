@@ -8,17 +8,16 @@ weight: 40
 
 ## About the Journal
 
-
-| :--- | :--- |
-| **Journal Title** | Journal of Strength and Performance |
-| **Journal Abbreviation** | J Strength Perf |
-| **Frequency** | Continuous flow |
-| **Publisher** | Centre for Applied Strength and Conditioning Science |
-| **Place of publication** | Edogawa-ku, Tokyo, Japan |
-| **Language** | English |
-| **Review** | Peer-reviewed |
-| **eISSN** | 2436-9810 |
-| **Open Access** | Open Access and distributed under the terms of the Creative Commons Attribution License |
+| **Journal Title**        | Journal of Strength and Performance                                                     |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| **Journal Abbreviation** | J Strength Perf                                                                         |
+| **Frequency**            | Continuous flow                                                                         |
+| **Publisher**            | Centre for Applied Strength and Conditioning Science                                    |
+| **Place of publication** | Edogawa-ku, Tokyo, Japan                                                                |
+| **Language**             | English                                                                                 |
+| **Review**               | Peer-reviewed                                                                           |
+| **eISSN**                | 2436-9810                                                                               |
+| **Open Access**          | Open Access and distributed under the terms of the Creative Commons Attribution License |
 
 ## Aims and Scope
 
@@ -27,13 +26,8 @@ The aims of the **JSP** are to facilitate the dissemination of "real-world" rese
 The journal provides a platform to share an informative and exciting new discovery about basic and applied sciences in specialized fields of strength training such as:
 
 * Response to training/exercise
-
 * Testing, Programming, and Monitoring 
-
 * Exercise biomechanics
-
 * Technological advancements
-
 * Psychological development
-
 * Etc.
