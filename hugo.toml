@@ -56,3 +56,10 @@ buildFuture = true
   baseName = "cita"
   isPlainText = true
   notAlternative = true
+
+# Every article generates its HTML page and the .bib and .ris citation files.
+[[cascade]]
+  outputs = ["HTML", "BibTeX", "RIS"]
+  [cascade.target]
+    path = "/articles/**"
+    kind = "page"
