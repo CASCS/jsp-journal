@@ -20,6 +20,10 @@
   {{- $zenodo = printf "https://zenodo.org/records/%s" (strings.TrimPrefix "10.5281/zenodo." $doi) }}
 {{- end }}
 
+{{- /* Zenodo record number used to read usage statistics. */ -}}
+{{- $rid := "" }}
+{{- if and $doi (strings.HasPrefix $doi "10.5281/zenodo.") }}{{ $rid = strings.TrimPrefix "10.5281/zenodo." $doi }}{{ else }}{{ with .Params.zenodo_id }}{{ $rid = string . }}{{ end }}{{ end }}
+
 {{- $affs := slice }}
 {{- range .Params.authors }}{{ with .affiliation }}{{ $affs = $affs | append . }}{{ end }}{{ end }}
 {{- $affs = $affs | uniq }}
@@ -130,7 +134,52 @@
           {{ end }}
         </dl>
       </section>
+
+      {{ with $rid }}
+      <section class="panel usage" data-zenodo-record="{{ . }}" hidden>
+        <h2 class="eyebrow">Usage</h2>
+        <div class="usage__grid">
+          <div class="usage__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span class="usage__num" data-stat="views">0</span>
+            <span class="usage__label">Views</span>
+          </div>
+          <div class="usage__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span class="usage__num" data-stat="downloads">0</span>
+            <span class="usage__label">Downloads</span>
+          </div>
+        </div>
+        <p class="note">Unique counts across all versions. Source: {{ with $zenodo }}<a href="{{ . }}">Zenodo</a>{{ else }}Zenodo{{ end }}.</p>
+      </section>
+      {{ end }}
     </aside>
   </div>
 </article>
+
+{{- if $rid }}
+<script>
+  /* Reads the usage statistics from Zenodo. If Zenodo cannot be reached, the panel stays hidden. */
+  (function () {
+    var box = document.querySelector("[data-zenodo-record]");
+    if (!box || !window.fetch) return;
+    var base = "https://zenodo.org/api/records/" + encodeURIComponent(box.getAttribute("data-zenodo-record"));
+    var get = function (url) {
+      return fetch(url, { headers: { Accept: "application/json" } })
+        .then(function (r) { if (!r.ok) throw new Error("status " + r.status); return r.json(); });
+    };
+    /* A general (concept) record number is not always served directly: fall back to its latest version. */
+    get(base).catch(function () { return get(base + "/versions/latest"); })
+      .then(function (j) {
+        var s = j.stats && (j.stats.all_versions || j.stats);
+        if (!s || typeof s.unique_views !== "number" || typeof s.unique_downloads !== "number") throw new Error("no stats");
+        var fmt = function (n) { return n.toLocaleString(document.documentElement.lang || "en"); };
+        box.querySelector('[data-stat="views"]').textContent = fmt(s.unique_views);
+        box.querySelector('[data-stat="downloads"]').textContent = fmt(s.unique_downloads);
+        box.hidden = false;
+      })
+      .catch(function () {});
+  })();
+</script>
+{{- end }}
 {{ end }}
