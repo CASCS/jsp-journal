@@ -812,3 +812,41 @@ a.idbadge__value:focus-visible {
   color: var(--ink);
   text-decoration: line-through;
 }
+
+/* Usage statistics (views and downloads) read from Zenodo */
+.usage[hidden] {
+  display: none;
+}
+
+.usage__grid {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.usage__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  align-items: baseline;
+  color: var(--muted);
+}
+
+.usage__item svg {
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.usage__num {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.usage__label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
