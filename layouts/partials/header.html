@@ -7,8 +7,24 @@
       <span class="brand__name">{{ site.Title }}</span>
     </a>
     <nav class="nav" aria-label="Main">
+      {{- /* A page with "menu_parent: /about/" in its front matter appears as a submenu item of the menu entry whose address is /about/. */ -}}
+      {{- $basePath := (urls.Parse site.BaseURL).Path | strings.TrimSuffix "/" }}
       {{ range site.Menus.main }}
+        {{- $key := printf "/%s/" (strings.Trim (.URL | strings.TrimPrefix $basePath) "/") }}
+        {{- $kids := (where site.RegularPages "Params.menu_parent" $key).ByWeight }}
+        {{- $childActive := eq $current.Params.menu_parent $key }}
+        {{- if $kids }}
+        <div class="nav__item nav__item--has-sub">
+          <a href="{{ .URL }}"{{ if $current.IsMenuCurrent "main" . }} aria-current="page"{{ else if $childActive }} aria-current="true"{{ end }}>{{ .Name }}</a>
+          <ul class="nav__sub">
+            {{- range $kids }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq $current.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+            {{- end }}
+          </ul>
+        </div>
+        {{- else }}
         <a href="{{ .URL }}"{{ if $current.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{- end }}
       {{ end }}
     </nav>
   </div>
