@@ -1,0 +1,164 @@
+{{ define "main" }}
+{{- $maxMb := site.Params.submission_max_mb | default 8 }}
+{{- $types := site.Params.article_types | default (slice "Research Article" "Review Article" "Short Communication" "Brief Report") }}
+{{- $license := site.Params.license | default "CC BY 4.0" }}
+<article class="panel submit">
+  <h1 class="page-title">{{ .Title }}</h1>
+  <div class="prose">{{ .Content }}</div>
+
+  <form id="submission-form" class="form" name="manuscript-submission" method="POST" action="{{ "/submission-received/" | relURL }}" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-max-mb="{{ $maxMb }}"{{ with site.Params.submission_email }} data-email="{{ . }}"{{ end }}>
+    <input type="hidden" name="form-name" value="manuscript-submission">
+    <p hidden><label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <input type="hidden" name="anonymity_report" value="">
+
+    <section class="form__section" aria-labelledby="s-manuscript">
+      <h2 class="eyebrow" id="s-manuscript">Manuscript</h2>
+      <div class="field">
+        <label for="article_type">Article type <span class="req" aria-hidden="true">*</span></label>
+        <select id="article_type" name="article_type" required>
+          <option value="">Select a type</option>
+          {{- range $types }}
+          <option>{{ . }}</option>
+          {{- end }}
+        </select>
+      </div>
+      <div class="field">
+        <label for="title">Manuscript title <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="title" name="title" required>
+      </div>
+      <div class="field">
+        <label for="abstract">Abstract <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="abstract" name="abstract" rows="9" required></textarea>
+      </div>
+      <div class="field">
+        <label for="keywords">Keywords <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="keywords" name="keywords" required aria-describedby="keywords-hint">
+        <span class="note" id="keywords-hint">Three to six keywords, separated by commas.</span>
+      </div>
+    </section>
+
+    <section class="form__section" aria-labelledby="s-authors">
+      <h2 class="eyebrow" id="s-authors">Authors</h2>
+      <p class="form__help">List all authors in the order they will appear. Author details are seen only by the editor and are never shared with reviewers. Do not write them in the manuscript file.</p>
+      {{- range seq 1 12 }}
+      {{- $n := . }}
+      <fieldset class="author" data-author="{{ $n }}"{{ if gt $n 1 }} hidden{{ end }}>
+        <legend>Author {{ $n }}</legend>
+        <div class="grid-2">
+          <div class="field">
+            <label for="a{{ $n }}-given">Given name(s) <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="a{{ $n }}-given" name="author_{{ $n }}_given" data-f="given" data-req="1" autocomplete="off"{{ if eq $n 1 }} required{{ end }}>
+          </div>
+          <div class="field">
+            <label for="a{{ $n }}-family">Family name(s) <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="a{{ $n }}-family" name="author_{{ $n }}_family" data-f="family" data-req="1" autocomplete="off"{{ if eq $n 1 }} required{{ end }}>
+          </div>
+        </div>
+        <div class="field">
+          <label for="a{{ $n }}-affiliation">Affiliation <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="a{{ $n }}-affiliation" name="author_{{ $n }}_affiliation" data-f="affiliation" data-req="1" autocomplete="off"{{ if eq $n 1 }} required{{ end }}>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="a{{ $n }}-orcid">ORCID <span class="muted">(optional)</span></label>
+            <input type="text" id="a{{ $n }}-orcid" name="author_{{ $n }}_orcid" data-f="orcid" inputmode="text" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]" title="Format: 0000-0000-0000-0000" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="a{{ $n }}-email">Email <span class="muted" data-email-note>(required for the corresponding author)</span></label>
+            <input type="email" id="a{{ $n }}-email" name="author_{{ $n }}_email" data-f="email" autocomplete="off"{{ if eq $n 1 }} required{{ end }}>
+          </div>
+        </div>
+        <label class="check"><input type="radio" name="corresponding" value="{{ $n }}"{{ if eq $n 1 }} checked{{ end }}> <span>This is the corresponding author</span></label>
+      </fieldset>
+      {{- end }}
+      <div class="actions actions--tight">
+        <button type="button" class="btn btn--small" id="add-author" hidden>Add another author</button>
+        <button type="button" class="btn btn--small" id="remove-author" hidden>Remove last author</button>
+      </div>
+    </section>
+
+    <section class="form__section" aria-labelledby="s-files">
+      <h2 class="eyebrow" id="s-files">Files</h2>
+      <div class="field">
+        <label for="manuscript">Anonymized manuscript <span class="req" aria-hidden="true">*</span></label>
+        <input type="file" id="manuscript" name="manuscript" accept=".docx,.pdf" required aria-describedby="manuscript-hint">
+        <span class="note" id="manuscript-hint">Word (.docx) or PDF, up to {{ $maxMb }} MB. The file must not contain author names, affiliations, acknowledgements, funding or file properties that identify you. Name the file with a neutral word such as "manuscript".</span>
+      </div>
+      <div id="anon-report" class="anon-report" role="status" aria-live="polite" hidden></div>
+      <div class="field">
+        <label for="supplementary">Supplementary files <span class="muted">(optional, anonymized)</span></label>
+        <input type="file" id="supplementary" name="supplementary" aria-describedby="supp-hint">
+        <span class="note" id="supp-hint">One file, up to {{ $maxMb }} MB. Combine several files in a single .zip.</span>
+      </div>
+      <div class="field">
+        <label for="supplementary_link">Link to large files <span class="muted">(optional)</span></label>
+        <input type="url" id="supplementary_link" name="supplementary_link" placeholder="https://" aria-describedby="link-hint">
+        <span class="note" id="link-hint">For data, code or files larger than {{ $maxMb }} MB. Use an anonymous or private link that does not show your name.</span>
+      </div>
+    </section>
+
+    <section class="form__section" aria-labelledby="s-statements">
+      <h2 class="eyebrow" id="s-statements">Statements</h2>
+      <p class="form__help">These statements are kept out of the manuscript for blind review. They will be added to the article if it is accepted.</p>
+      <div class="field">
+        <label for="cover_letter">Cover letter <span class="muted">(optional)</span></label>
+        <textarea id="cover_letter" name="cover_letter" rows="5"></textarea>
+      </div>
+      <div class="field">
+        <label for="funding">Funding <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="funding" name="funding" rows="2" required aria-describedby="funding-hint"></textarea>
+        <span class="note" id="funding-hint">Funding sources and grant numbers, or "None".</span>
+      </div>
+      <div class="field">
+        <label for="conflicts">Conflicts of interest <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="conflicts" name="conflicts" rows="2" required aria-describedby="conflicts-hint"></textarea>
+        <span class="note" id="conflicts-hint">Declare any financial or personal relationships that could be seen as influencing the work, or write "None".</span>
+      </div>
+      <div class="field">
+        <label for="ethics">Ethics approval <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="ethics" name="ethics" rows="2" required aria-describedby="ethics-hint"></textarea>
+        <span class="note" id="ethics-hint">Name of the ethics committee and approval number, or "Not applicable".</span>
+      </div>
+      <div class="field">
+        <label for="data_availability">Data availability <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="data_availability" name="data_availability" rows="2" required></textarea>
+      </div>
+      <div class="field">
+        <label for="acknowledgements">Acknowledgements <span class="muted">(optional)</span></label>
+        <textarea id="acknowledgements" name="acknowledgements" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="form__section" aria-labelledby="s-reviewers">
+      <h2 class="eyebrow" id="s-reviewers">Reviewers <span class="muted">(optional)</span></h2>
+      <div class="field">
+        <label for="suggested_reviewers">Suggested reviewers</label>
+        <textarea id="suggested_reviewers" name="suggested_reviewers" rows="3" aria-describedby="sr-hint"></textarea>
+        <span class="note" id="sr-hint">Up to three, with name, affiliation and email. They must have no conflict of interest with the authors.</span>
+      </div>
+      <div class="field">
+        <label for="excluded_reviewers">Reviewers to exclude</label>
+        <textarea id="excluded_reviewers" name="excluded_reviewers" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="form__section" aria-labelledby="s-declarations">
+      <h2 class="eyebrow" id="s-declarations">Declarations</h2>
+      <label class="check"><input type="checkbox" name="decl_original" value="yes" required> <span>This manuscript reports original work and has not been published elsewhere, in whole or in part.</span></label>
+      <label class="check"><input type="checkbox" name="decl_not_elsewhere" value="yes" required> <span>It is not under consideration by another journal.</span></label>
+      <label class="check"><input type="checkbox" name="decl_authors_approved" value="yes" required> <span>All authors have read and approved the manuscript and agree to its submission.</span></label>
+      <label class="check"><input type="checkbox" name="decl_anonymized" value="yes" required> <span>The manuscript file contains no author names, affiliations or acknowledgements, and I removed the identifying properties of the file.</span></label>
+      <label class="check"><input type="checkbox" name="decl_license" value="yes" required> <span>If the manuscript is accepted, the authors agree to publish it under the {{ $license }} license.</span></label>
+      <label class="check"><input type="checkbox" name="decl_privacy" value="yes" required> <span>I agree that the data in this form is used only for the editorial process. Reviewers never see the author details, and the form is stored with our form provider, Netlify.</span></label>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="btn btn--primary">Submit manuscript</button>
+      <span id="form-status" class="muted" role="status" aria-live="polite"></span>
+    </div>
+    {{ with site.Params.submission_email }}<p class="note">If the form does not work for you, write to <a href="mailto:{{ . }}">{{ . }}</a>.</p>{{ end }}
+    <noscript><p class="note">The form works without JavaScript, but the automatic check of your file and the button to add authors need it.</p></noscript>
+  </form>
+</article>
+{{ with resources.Get "js/submit.js" }}{{ $js := . | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>{{ end }}
+{{ end }}

@@ -19,6 +19,11 @@ buildFuture = true
   ark_naan = "57464"
   ark_shoulder = "jsp"
 
+  submission_max_mb = 8
+  submission_email = ""      # tu correo editorial (opcional, aparece bajo el formulario)
+  license = "CC BY 4.0"
+  article_types = ["Research Article", "Review Article", "Short Communication", "Brief Report"]
+
 [menus]
   [[menus.main]]
     name = "Articles"
@@ -32,6 +37,10 @@ buildFuture = true
     name = "Author guidelines"
     pageRef = "/author-guidelines"
     weight = 30
+  [[menus.main]]
+    name = "Submit"
+    pageRef = "/submit"
+    weight = 40
 
 
 # Pages created in Decap live in content/pages/ but are published at the site root:
