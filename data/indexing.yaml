@@ -1,6 +1,6 @@
 items:
   - name: Zenodo
-    url: https://zenodo.org
+    url: https://zenodo.org/communities/jsp/
     logo: /uploads/zenodo.svg
   - name: OpenAIRE
     url: https://www.openaire.eu
