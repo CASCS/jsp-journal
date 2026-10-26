@@ -1,16 +1,16 @@
 items:
+  - name: ROAD
+    logo: /uploads/road-issn-1-.png
+    url: https://publishers.issn.org/resource/ISSN/2436-9810
+  - name: OpenAlex
+    url: https://openalex.org
+    logo: https://cdn.brandfetch.io/idfp5U93sg/w/520/h/488/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B
   - name: Zenodo
     url: https://zenodo.org/communities/jsp/
     logo: /uploads/zenodo.svg
   - name: OpenAIRE
     url: https://www.openaire.eu
     logo: /uploads/idpir-cayp_logos.png
-  - name: OpenAlex
-    url: https://openalex.org
-    logo: https://cdn.brandfetch.io/idfp5U93sg/w/520/h/488/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B
   - name: DataCite
     url: https://datacite.org
     logo: https://cdn.brandfetch.io/idiKr4mmSS/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B
-  - name: ROAD
-    logo: /uploads/road-issn-1-.png
-    url: https://publishers.issn.org/resource/ISSN/2436-9810
