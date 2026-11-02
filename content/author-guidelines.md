@@ -1,6 +1,8 @@
 ---
 title: Author guidelines
 ---
+# Author Guidelines
+
 The journal, from the second half of 2023, publishes only short, single-claim research papers in which every statement is traceable to its data and methods; these guidelines say what to include so reviewers can verify your claim.
 
 ## Scope and article types
@@ -9,11 +11,11 @@ The Journal of Strength and Performance is an open access journal that provides 
 
 The journal is non-profit and diamond open access: reading and publishing are free. It accepts short papers that argue one principal claim with its supporting evidence. Articles for consideration include:
 
-* **Positive results:** findings that support the hypothesis, reported in full.
-* **Negative or null results:** findings that do not support the hypothesis or show no effect.
-* **Exploratory studies:** preliminary or hypothesis-generating work, labeled as exploratory.
-* **Reproducibility studies:** replications of published findings, whether or not they agree with the original.
-* **Supplementary findings:** results that did not fit the narrative of a larger paper but are worth reporting on their own.
+- **Positive results:** findings that support the hypothesis, reported in full.
+- **Negative or null results:** findings that do not support the hypothesis or show no effect.
+- **Exploratory studies:** preliminary or hypothesis-generating work, labeled as exploratory.
+- **Reproducibility studies:** replications of published findings, whether or not they agree with the original.
+- **Supplementary findings:** results that did not fit the narrative of a larger paper but are worth reporting on their own.
 
 The journal does not consider papers that bundle several unrelated claims, narrative reviews without a new dataset, or work that cannot be described with full methods.
 
@@ -39,16 +41,48 @@ Keep the paper short. A concise paper that supplies everything the claim needs i
 
 Reviewers check the following items. A missing item is returned to you as a required revision.
 
-| Area                 | State in the manuscript                                                                                                                                             |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Participants         | n, age, sex, training status or competitive level, inclusion and exclusion criteria, recruitment, ethics approval and consent                                       |
-| Equipment            | Device make and model, sampling rate, software and version                                                                                                          |
-| Protocol             | Warm-up, instructions given, number of trials, how the analyzed trial was chosen, order of testing, rest intervals                                                  |
-| Reliability          | ICC (type stated), CV or SEM for each measure, from your own data or a cited study using the same protocol                                                          |
-| Statistics           | Test chosen and why, assumption checks, effect size (r, R², d), exact p-value, 95% confidence interval, handling of outliers, missing data and multiple comparisons |
-| Confounders          | Variables that could explain the result (for example body mass, sex, age, technique, fatigue, testing order) and whether you adjusted for them                      |
-| Experimental studies | Allocation method, blinding, outcome definition, follow-up and exposure                                                                                             |
-| Data                 | Raw data and analysis code in a public repository, or the reason they cannot be shared                                                                              |
+<table style="border-collapse:collapse;width:100%;margin:1em 0;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #9aa0a6;background:#d9dcdf;padding:6px 10px;text-align:left;">Area</th>
+      <th style="border:1px solid #9aa0a6;background:#d9dcdf;padding:6px 10px;text-align:left;">State in the manuscript</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Participants</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">n, age, sex, training status or competitive level, inclusion and exclusion criteria, recruitment, ethics approval and consent</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Equipment</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">Device make and model, sampling rate, software and version</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Protocol</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">Warm-up, instructions given, number of trials, how the analyzed trial was chosen, order of testing, rest intervals</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Reliability</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">ICC (type stated), CV or SEM for each measure, from your own data or a cited study using the same protocol</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Statistics</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">Test chosen and why, assumption checks, effect size (r, R², d), exact p-value, 95% confidence interval, handling of outliers, missing data and multiple comparisons</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Confounders</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">Variables that could explain the result (for example body mass, sex, age, technique, fatigue, testing order) and whether you adjusted for them</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Experimental studies</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">Allocation method, blinding, outcome definition, follow-up and exposure</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Data</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">Raw data and analysis code in a public repository, or the reason they cannot be shared</td>
+    </tr>
+  </tbody>
+</table>
 
 As a rule: r is a correlation coefficient and R² is its square, so r = 0.62 means about 38% shared variance. Report which one you give.
 
@@ -56,10 +90,10 @@ As a rule: r is a correlation coefficient and R² is its square, so r = 0.62 mea
 
 The Journal of Strength and Performance considers all manuscripts on these strict conditions:
 
-* The manuscript is your own original work and does not duplicate any previously published work.
-* All co-authors approve the submission and have contributed sufficiently to the research.
-* The manuscript has been submitted only to the Journal of Strength and Performance and is not under consideration for publication elsewhere.
-* Where applicable, the institution where the work was carried out has approved the research.
+- The manuscript is your own original work and does not duplicate any previously published work.
+- All co-authors approve the submission and have contributed sufficiently to the research.
+- The manuscript has been submitted only to the Journal of Strength and Performance and is not under consideration for publication elsewhere.
+- Where applicable, the institution where the work was carried out has approved the research.
 
 The publisher is not legally responsible for any claims for compensation concerning these requirements. By submitting a manuscript, you agree to any originality checks it may undergo during peer review and production. Any author who fails to adhere to these conditions is rejected.
 
@@ -96,12 +130,32 @@ Reviewers also recompute the statistics your claim depends on from the numbers y
 
 Each report ends with one decision. You will receive the reviews with the decision, and every critique is marked **Required** (it changes the decision) or **Suggested**.
 
-| Decision        | Meaning                                                                                                                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Accept          | The claim is fully supported at its stated scope; only polish remains                                                                 |
-| Minor Revisions | The claim stands; fixes concern clarity, reporting or wording                                                                         |
-| Major Revisions | The claim may be valid, but a required link is missing or overstated                                                                  |
-| Reject          | The evidence cannot support the claim at any reasonable scope, the design cannot answer the question, or there are integrity concerns |
+<table style="border-collapse:collapse;width:100%;margin:1em 0;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #9aa0a6;background:#d9dcdf;padding:6px 10px;text-align:left;">Decision</th>
+      <th style="border:1px solid #9aa0a6;background:#d9dcdf;padding:6px 10px;text-align:left;">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Accept</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">The claim is fully supported at its stated scope; only polish remains</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Minor Revisions</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">The claim stands; fixes concern clarity, reporting or wording</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;font-weight:bold;">Major Revisions</td>
+      <td style="border:1px solid #9aa0a6;background:#f1f2f3;padding:6px 10px;vertical-align:top;">The claim may be valid, but a required link is missing or overstated</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;font-weight:bold;">Reject</td>
+      <td style="border:1px solid #9aa0a6;background:#ffffff;padding:6px 10px;vertical-align:top;">The evidence cannot support the claim at any reasonable scope, the design cannot answer the question, or there are integrity concerns</td>
+    </tr>
+  </tbody>
+</table>
 
 When you revise, answer every Required item point by point and mark where the manuscript changed.
 
@@ -131,18 +185,18 @@ After acceptance you will receive a proof of the article page and PDF. Correctio
 
 Tick each item before you submit.
 
-* The Principal Claim is one standalone sentence, with population, measure and size of the effect in it.
-* Title, abstract, claim and conclusion say the same thing at the same strength.
-* Wording matches the design: association for correlational data, no prescriptions without intervention data.
-* Sample details, equipment, protocol and reliability are all reported.
-* Every statistic the claim depends on has an effect size, exact p-value and 95% confidence interval, and I recomputed it.
-* Numbers agree across text, tables and figures; figures show variability and units.
-* Each key citation shows what I say it shows; none rests only on a narrative review or on my own pilot work.
-* I named the strongest alternative explanation and the main confounders.
-* Limitations are specific to this study.
-* Ethics approval, consent, funding, conflicts, contributions and data availability are declared.
-* The manuscript file contains no names, affiliations or identifying file properties.
-* All co-authors approved the submission and contributed sufficiently to the research.
-* The manuscript is original, duplicates no published work, and is not under consideration elsewhere.
-* The manuscript states institutional ethics approval and signed informed consent, and identifies no participant.
-* I will return any requested revision within 10 days.
+- [ ] The Principal Claim is one standalone sentence, with population, measure and size of the effect in it.
+- [ ] Title, abstract, claim and conclusion say the same thing at the same strength.
+- [ ] Wording matches the design: association for correlational data, no prescriptions without intervention data.
+- [ ] Sample details, equipment, protocol and reliability are all reported.
+- [ ] Every statistic the claim depends on has an effect size, exact p-value and 95% confidence interval, and I recomputed it.
+- [ ] Numbers agree across text, tables and figures; figures show variability and units.
+- [ ] Each key citation shows what I say it shows; none rests only on a narrative review or on my own pilot work.
+- [ ] I named the strongest alternative explanation and the main confounders.
+- [ ] Limitations are specific to this study.
+- [ ] Ethics approval, consent, funding, conflicts, contributions and data availability are declared.
+- [ ] The manuscript file contains no names, affiliations or identifying file properties.
+- [ ] All co-authors approved the submission and contributed sufficiently to the research.
+- [ ] The manuscript is original, duplicates no published work, and is not under consideration elsewhere.
+- [ ] The manuscript states institutional ethics approval and signed informed consent, and identifies no participant.
+- [ ] I will return any requested revision within 10 days.
