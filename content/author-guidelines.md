@@ -1,8 +1,6 @@
 ---
 title: Author guidelines
 ---
-# Author Guidelines
-
 The journal, from the second half of 2023, publishes only short, single-claim research papers in which every statement is traceable to its data and methods; these guidelines say what to include so reviewers can verify your claim.
 
 ## Scope and article types
