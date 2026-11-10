@@ -72,3 +72,10 @@ buildFuture = true
   [cascade.target]
     path = "/articles/**"
     kind = "page"
+
+
+ [markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [["$$", "$$"]]
+    inline = [["$", "$"]]   
