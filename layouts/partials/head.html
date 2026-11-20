@@ -1,19 +1,49 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{- $title := site.Title }}
+{{- /* Title: home gets a descriptive tagline; other pages "Page · Journal". */ -}}
+{{- $title := printf "%s · %s" site.Title (site.Params.tagline | default "Diamond open access journal") }}
 {{- if not .IsHome }}{{ $title = printf "%s · %s" .Title site.Title }}{{ end }}
+{{- if eq .Kind "404" }}{{ $title = printf "Page not found · %s" site.Title }}{{ end }}
 <title>{{ $title }}</title>
-{{- $desc := site.Params.description }}
-{{- if and .IsPage .Plain }}{{ $desc = .Plain | truncate 200 }}{{ end }}
+{{- /* Description: the abstract / first text of the page, with math turned into plain text. */ -}}
+{{- $desc := .Params.description | default site.Params.description }}
+{{- if and .IsPage (not .Params.description) .Plain }}
+  {{- $t := .Plain | replaceRE `\\pm` "±" | replaceRE `\\geq?` "≥" | replaceRE `\\leq?` "≤" | replaceRE `\\[a-zA-Z]+` "" | replaceRE `[$\{\}^_]` "" | replaceRE `\s+` " " | replaceRE `^\s+|\s+$` "" }}
+  {{- $desc = $t | truncate 200 }}
+{{- end }}
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
+{{- if or .Params.noindex (eq .Kind "404") }}
+<meta name="robots" content="noindex, follow">
+{{- end }}
+{{- with site.Params.google_site_verification }}
+<meta name="google-site-verification" content="{{ . }}">
+{{- end }}
+{{- with site.Params.bing_site_verification }}
+<meta name="msvalidate.01" content="{{ . }}">
+{{- end }}
 <link rel="icon" href="{{ site.Params.favicon | default "/images/favicon.svg" | relURL }}">
+{{- $img := site.Params.og_image | default "/images/social-card.png" | absURL }}
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:type" content="{{ if eq .Section "articles" }}{{ if .IsPage }}article{{ else }}website{{ end }}{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:image" content="{{ $img }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $img }}">
 {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">{{ end }}
+{{- if .IsHome }}
+{{- $pub := dict "@type" "Organization" "name" (site.Params.publisher | default site.Title) }}
+{{- $per := dict "@type" "Periodical" "name" site.Title "url" site.BaseURL "description" site.Params.description "isAccessibleForFree" true "inLanguage" "en" "publisher" $pub }}
+{{- with site.Params.issn }}{{ $per = merge $per (dict "issn" .) }}{{ end }}
+{{- $site := dict "@type" "WebSite" "name" site.Title "url" site.BaseURL "inLanguage" "en" }}
+<script type="application/ld+json">{{ slice $per $site | jsonify | safeJS }}</script>
+{{- end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">

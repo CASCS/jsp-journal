@@ -1,5 +1,6 @@
 ---
 title: "Manuscript received"
+noindex: true
 sitemap:
   disable: true
 _build:

@@ -59,7 +59,12 @@
     "author" $authors
     "datePublished" (.Date.Format "2006-01-02")
     "isAccessibleForFree" true
-    "isPartOf" $issue }}
+    "isPartOf" $issue
+    "publisher" (dict "@type" "Organization" "name" (site.Params.publisher | default site.Title))
+    "license" (cond (eq (.Params.license | default site.Params.license) "CC BY 4.0") "https://creativecommons.org/licenses/by/4.0/" (.Params.license | default site.Params.license | default "")) }}
+{{- $abs := .Plain | replaceRE `\\pm` "±" | replaceRE `\\[a-zA-Z]+` "" | replaceRE `[$\{\}^_]` "" | replaceRE `\s+` " " | replaceRE `^\s+|\s+$` "" }}
+{{- with $abs }}{{ $ld = merge $ld (dict "abstract" .) }}{{ end }}
+{{- with (partial "article-ids.html" .).doi }}{{ $ld = merge $ld (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
 {{- with .Params.language }}{{ $ld = merge $ld (dict "inLanguage" .) }}{{ end }}
 {{- with .Params.keywords }}{{ $ld = merge $ld (dict "keywords" .) }}{{ end }}
 {{- with (partial "article-ids.html" .).doi }}{{ $ld = merge $ld (dict "sameAs" (printf "https://doi.org/%s" .)) }}{{ end }}
