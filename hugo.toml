@@ -19,6 +19,11 @@ buildFuture = true
   ark_naan = "57464"
   ark_shoulder = "jsp"
 
+tagline = "Diamond open access journal"
+  google_site_verification = "google865d5edf818a10a9.html"   # código de Search Console (paso 3)
+  bing_site_verification = ""     # código de Bing Webmaster (paso 4)
+  
+
   submission_max_mb = 8
   submission_email = ""      # tu correo editorial (opcional, aparece bajo el formulario)
   license = "CC BY 4.0"
