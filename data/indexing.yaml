@@ -3,7 +3,7 @@ items:
     logo: /uploads/road-issn-1-.png
     url: https://publishers.issn.org/resource/ISSN/2436-9810
   - name: OpenAlex
-    url: https://openalex.org
+    url: https://openalex.org/sources/S5406999035
     logo: https://cdn.brandfetch.io/idfp5U93sg/w/520/h/488/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B
   - name: Zenodo
     url: https://zenodo.org/communities/jsp/
